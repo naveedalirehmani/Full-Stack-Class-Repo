@@ -62,7 +62,7 @@ const MultipleRoutes = () => {
             <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Route>
         </Routes>
-        // element
+        // elementg
     )
 }
 
