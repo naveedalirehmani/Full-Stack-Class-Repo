@@ -9,8 +9,6 @@ export const Sidebar = () => {
     //* 2. to="/" : takes to this path
     //* 3. reloadDocument: this will reload entire page on click by default react-router only conditionaly renders content.
     
-    const params = useParams()
-    console.log('params',params)
   return (
     <div className="flex flex-col h-screen p-3 bg-white shadow w-60 sticky top-0">
                 <div className="space-y-3">
@@ -40,7 +38,7 @@ export const Sidebar = () => {
                                     </svg>
                                     <span> <NavLink end style={(isActive)=>{
                                         return isActive ? {color:'black'} : {}
-                                    }} to="/routes/nested/reactrouterdom">React Router Dom </NavLink></span>
+                                    }} to="/routes/nested/reactrouterdom" state="thisisstate">React Router Dom </NavLink></span>
                                 </a>
                             </li>
                             <li className="rounded-sm">

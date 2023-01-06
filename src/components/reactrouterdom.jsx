@@ -1,7 +1,11 @@
 import React from 'react'
+import {useLocation} from 'react-router-dom';
 import Code from './code.jsx'
 
 export const ReactRouterDom = () => {
+
+  const location = useLocation()
+  
   return (
     <div style={{ width: '80vw' }}>
       <p>
@@ -9,7 +13,7 @@ export const ReactRouterDom = () => {
       </p>
       <p>
         BrowserRouter: A router that uses the HTML5 history API to keep your UI in sync with the URL. It should be used when you have a server that will handle dynamic requests (knows how to respond to any possible URI).
-        Copy code
+        
       </p>
       <Code value={`
       import { BrowserRouter } from 'react-router-dom';
@@ -22,7 +26,7 @@ export const ReactRouterDom = () => {
 };`} />
       <p>
         HashRouter: A router that uses the hash part of the URL (e.g. window.location.hash) to keep your UI in sync with the URL. It should be used when you don't have a server that will handle dynamic requests.
-        Copy code
+        
       </p>
       <Code value={`import { HashRouter } from 'react-router-dom';
 
@@ -37,7 +41,7 @@ const App = () => {
       <p>
 
         Link: A component that is used to navigate to different routes in your app. It renders as an a element and should be used instead of a regular a element to avoid a full page refresh.
-        Copy code
+        
       </p>
       <Code value={`import { Link } from 'react-router-dom';
 
@@ -55,7 +59,7 @@ const App = () => {
         Route: A component that is used to render a specific component when the route's path matches the current URL. It has the following props:
         path: a string or regex that matches the current URL
         element: the React element to render for the route
-        Copy code
+        
       </p>
       <Code value={`
 import { Route } from 'react-router-dom';
@@ -200,6 +204,64 @@ const NotFoundPage = () => {
 }
 
 export default NotFoundPage`}></Code>
+
+
+<p>
+useLocation is a hook from the react-router-dom library that allows you to access the current location object for the current route. The location object contains information about the current URL, including the pathname, search string, and hash.
+Here's an example of how you can use the useLocation hook:
+
+with Link and Navlink tags we can also add state on click such. <Code value={`<NavLink state='2'></NavLink>`}></Code>
+we can get this state variable with useLocation
+</p>
+<Code value={`
+import { useLocation } from 'react-router-dom'
+
+const Example = () => {
+  const location = useLocation()
+  console.log(location.pathname) // logs the current pathname
+  console.log(location.search) // logs the current search string
+  console.log(location.hash) // logs the current hash
+}
+`}></Code>
+<p>
+
+useSearchParams is a hook from the react-router-dom library that allows you to access and manipulate the search string of the current URL. The search string is the part of the URL that comes after the ? character, and it can contain key-value pairs in the form of key=value.
+Here's an example of how you can use the useSearchParams hook:
+
+used to get the search params such as "page" in https://localhost:3000/character/?page=2 
+
+</p>
+
+<Code value={`
+  
+import { useSearchParams } from 'react-router-dom'
+
+const Example = () => {
+  const searchParams = useSearchParams()
+  console.log(searchParams.get('key')) // logs the value of the "key" parameter in the search string
+  searchParams.set('key', 'newValue') // updates the "key" parameter in the search string
+  searchParams.delete('key') // removes the "key" parameter from the search string
+  searchParams.append('newKey', 'newValue') // adds a new "newKey" parameter to the search string
+}
+  `}></Code>
+  <p>
+
+useParams is a hook from the react-router-dom library that allows you to access the dynamic parameters of the current route. Dynamic parameters are parts of the route's pathname that are prefixed with a : character, and they can be used to represent a variable value in the route.
+Here's an example of how you can use the useParams hook:
+
+used to get the url params example: params/:id you can get this id with useParams
+  </p>
+
+<Code value={`
+import { useParams } from 'react-router-dom'
+
+const Example = () => {
+  const params = useParams()
+  console.log(params.id) // logs the value of the "id" parameter in the current route
+}`}></Code>
+<p>
+In this example, the component will log the value of the "id" parameter in the current route. For example, if the current route is /users/123, the component will log 123.
+</p>
     </div>
 
   )

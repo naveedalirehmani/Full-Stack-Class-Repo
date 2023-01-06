@@ -3,11 +3,13 @@ import React,{useState,useEffect} from 'react'
 function useFetch(url) {
     
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-  
+
+    console.log(loading)
     useEffect(() => {
       const controller = new AbortController();
+      setLoading(true)
   
       async function fetchData() {
         try {
@@ -24,8 +26,8 @@ function useFetch(url) {
           setLoading(false);
         }
       }
-  
-      setTimeout(fetchData,2000)
+
+      fetchData()
   
       return () => {
         controller.abort();

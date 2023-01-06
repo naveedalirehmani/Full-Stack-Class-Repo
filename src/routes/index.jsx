@@ -6,6 +6,7 @@ import Layout from '../components/layout.jsx'
 import Home from '../components/home.jsx'
 import NotFoundPage from '../components/notfoundpage.jsx'
 import ReactRouterDom from '../components/reactrouterdom.jsx'
+import Hooks from '../hooks/hooks'
 
 const routes = [
     {
@@ -47,7 +48,7 @@ const MultipleRoutes = () => {
     // index will render on https://localhost:3000/nested.
 
 
-    // all of this is also posible with useRoutes hoook that is provided by react-router-dom;
+    // all of this is also posible with useRoutes hook that is provided by react-router-dom;
     // const element = useRoutes(routes);
 
     return (
@@ -59,6 +60,7 @@ const MultipleRoutes = () => {
             <Route path='usereducer' element={<UseReducerHook></UseReducerHook>}></Route>
             <Route path='rickandmorty' element={<RickAndMorty></RickAndMorty>}></Route>
             <Route path='reactrouterdom' element={<ReactRouterDom></ReactRouterDom>}></Route>
+            <Route path='customhooks' element={<Hooks></Hooks>}></Route>
             <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Route>
         </Routes>
