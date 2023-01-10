@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-const PaginationBar = ({ disabled, paginate }) => {
+const PaginationBar = () => {
 
     const [params, setParams] = useSearchParams()
 

@@ -1,15 +1,12 @@
-
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Home from './components/home.jsx'
-import Layout from './components/layout.jsx'
-import NotFoundPage from './components/notfoundpage.jsx'
-import MultipleRoutes from './routes'
-
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import UserProfile from "./components/userProfile.jsx";
+import Layout from "./components/layout.jsx";
+import NotFoundPage from "./components/notfoundpage.jsx";
+import MultipleRoutes from "./routes";
+import Auth from "./routes/auth";
 
 export const App = () => {
-
   // here * is used to match all incoming urls, by doing this we can nest/group routes together.
 
   //? you can nest multiple route in side a single route like this.
@@ -25,20 +22,22 @@ export const App = () => {
       <div>
         <Routes>
 
-            <Route element={<Layout></Layout>}>
-                <Route path="/" element={<Home></Home>}/>
-            </Route>
+          <Route path="/*" element={<Auth></Auth>}></Route>
 
-          <Route path="routes/*" element={<MultipleRoutes></MultipleRoutes>}></Route>
-          
-            <Route path="/*" element={<NotFoundPage></NotFoundPage>}></Route>
+          <Route element={<Layout></Layout>}>
+            <Route path="/userprofile" element={<UserProfile></UserProfile>} />
+          </Route>
+
+          <Route
+            path="routes/*"
+            element={<MultipleRoutes></MultipleRoutes>}
+          ></Route>
+
+          <Route path="/*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Routes>
       </div>
     </>
-  )
-}
-
+  );
+};
 
 export default App;
-
-

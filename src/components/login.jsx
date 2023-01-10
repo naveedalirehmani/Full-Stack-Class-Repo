@@ -1,6 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {Link, Navigate, useNavigate} from 'react-router-dom'
+import Toastify from "toastify-js";
 
 function LogInPage (props){
+    
+    const Navigate = useNavigate()
+    
+    const allUsers = JSON.parse(localStorage.getItem('users'))
+
+    const [userData,setUserData] = useState({
+        email:'',
+        password:""
+    })
+
+        
+  const saveLoginInfo = (e) =>{
+    let newUser = userData;
+    newUser = {...newUser,[e.target.name]:e.target.value}
+    setUserData(newUser)
+  }
+  
+    const loginHandler = ()=>{
+        const user = allUsers.find(item => {
+            return item.email === userData.email && item.password === userData.password
+        })
+
+        if(user){
+            localStorage.setItem('loggedInUser',JSON.stringify(user))
+            Navigate('/userprofile')
+        }else{
+            Toastify({
+                text: "email/password is incorrect",
+                duration: 3000,
+                close: true,
+                style: {
+                  background: "linear-gradient(to right, #db0000, #ff9100)",
+                },
+              }).showToast();
+        }
+        
+    }  
+
     return <div>
         <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -11,17 +51,20 @@ function LogInPage (props){
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
-                        placeholder="Email" />
-
+                        placeholder="Email" 
+                        onChange={(e)=>saveLoginInfo(e)}/>
+                        
                     <input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
-                        placeholder="Password" />
+                        placeholder="Password" 
+                        onChange={(e)=>saveLoginInfo(e)}/>
             
                     <button
                         type="submit"
                         class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
+                        onClick={loginHandler}
                     >Login</button>
 
                     <div class="text-center text-sm text-grey-dark mt-4">
@@ -37,9 +80,9 @@ function LogInPage (props){
 
                 <div class="text-grey-dark mt-6">
                     Create an Account 
-                    <a class="no-underline border-b border-blue text-blue" href="../login/">
-                        SignUp
-                    </a>.
+                    <Link to="/signup">
+                        Sign Up
+                    </Link>
                 </div>
             </div>
         </div>
