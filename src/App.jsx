@@ -24,8 +24,6 @@ export const App = () => {
     const user = localStorage.getItem('loggedInUser')
 
     if(!user) navigate('/login')
-
-    console.log('a;lsdhg;alsjdjghalksjd')
   
   }, [])
   
