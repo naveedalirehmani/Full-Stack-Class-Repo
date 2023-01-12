@@ -79,6 +79,15 @@ function SignUpPage(props) {
 
     const allUsers = JSON.parse(localStorage.getItem("users"));
 
+    Toastify({
+      text: "Account created!",
+      duration: 3000,
+      close: true,
+      style: {
+        background: "linear-gradient(to right, #00db1d, #ff9100)",
+      },
+    }).showToast();
+    
     if (!allUsers) {
       localStorage.setItem("users", JSON.stringify([userData]));
     } else {

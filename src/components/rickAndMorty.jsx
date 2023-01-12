@@ -1,5 +1,5 @@
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Card } from './card.jsx'
 import useFetch from '../hooks/custom/useFetch'
 import { Spinner } from './spinner.jsx'
@@ -12,6 +12,17 @@ export const RickAndMorty = () => {
   const [searchParams,setSearchParams] = useSearchParams()
 
   const currentPageNumber = searchParams.get('page')
+
+  useEffect(() => {
+    if(currentPageNumber<1){
+      setSearchParams({page:1})
+    }else if (currentPageNumber>42){
+      setSearchParams({page:42})
+    }
+  
+  }, [])
+  
+  
   
   const { data, loading, error } = useFetch(`https://rickandmortyapi.com/api/character/?page=${currentPageNumber}`)
   
