@@ -106,3 +106,14 @@ button{
 button:hover{
   color: rgb(163, 163, 163);
 }
+
+.code {
+  padding: 0.1rem 0.2rem;
+  background-color: #4e4e4e;
+  color:rgb(255, 255, 255);
+  /* color: #f8f8f2; */
+  border-radius: 0.3rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

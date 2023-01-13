@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import StoreProvider from './store/store';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import StoreProvider from './store/store'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // const h1 = React.createElement('h1',{className:"testClassName"},"hellow worldasdf")
 
@@ -27,7 +27,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // }
 // ReactDOM.createRoot(document.getELementById('root'));
 
-
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root')
 // );
@@ -47,11 +46,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-
-    {/* <StoreProvider> */}
-      <App/>
-    {/* </StoreProvider> */}
-
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

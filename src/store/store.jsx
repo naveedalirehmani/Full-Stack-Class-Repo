@@ -1,32 +1,32 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useState, useContext, createContext } from "react";
 
+const StoreContext = createContext(null);
 
 const useStore = () => {
-
   const [user, setUser] = useState("");
-  const [counter, setCounter] = useState(0);
+  const [count, setCount] = useState(0);
 
   return {
     user,
-    counter,
-    login : ()=> setUser("user"),
-    setCounter : ()=> setCounter(),
+    setUser,
+    count,
+    setCount: (value) => setCount(count + value),
   };
 };
 
-export const UseStoreContext = createContext(null);
-
-export const StoreProvider = ({ children }) => {
+const StoreProvider = ({ children }) => {
   return (
-    <UseStoreContext.Provider value={useStore()}>
-      {children}
-    </UseStoreContext.Provider>
+    <StoreContext.Provider value={useStore()}>{children}</StoreContext.Provider>
   );
 };
 
-export default StoreProvider;
+export const mutations = () => {
+  return {
+    useLogin: () => useContext(StoreContext).setUser,
+    useGetUser: () => useContext(StoreContext).user,
+    useGetCount: () => useContext(StoreContext).count,
+    useSetCount: () => useContext(StoreContext).setCount,
+  };
+};
 
-export const useUser = () => useContext(UseStoreContext).user;
-export const useLogin = () => useContext(UseStoreContext).login;
-export const useCounter = () => useContext(UseStoreContext).setCounter;
-export const useGetCounter = () => useContext(UseStoreContext).counter;
+export default StoreProvider;
