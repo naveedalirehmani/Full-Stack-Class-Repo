@@ -119,7 +119,7 @@ export const Sidebar = () => {
                                     }} to="/routes/nested/usestate">use State </NavLink></span>
                                 </a>
                             </li>
-                            {/* <li className="rounded-sm">
+                            <li className="rounded-sm">
                                 <a
                                     href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
@@ -147,7 +147,7 @@ export const Sidebar = () => {
                                         return isActive ? {color:'black'} : {}
                                     }} to="/routes/nested/usecontext-usestate">useContext</NavLink></span>
                                 </a>
-                            </li> */}
+                            </li>
                             <li className="rounded-sm">
                                 <a
                                     href="#"

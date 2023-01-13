@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Code from "../components/code.jsx";
+import ContextPage from "../store/component.jsx";
+import StoreAndStoreProvider from "../store/store.jsx";
 import RenderTodoList from "./components/todo.jsx";
 
-export const  UseStateHook = () => {
-  
-  const obj = useOutletContext()
+export const UseStateHook = () => {
+  const obj = useOutletContext();
 
   const [inputValue, setInputValue] = useState("");
 
   const [allTodos, setAllTodos] = useState([
-    {id:0,value:'props passing test',completed:false}
+    { id: 0, value: "props passing test", completed: false },
   ]);
 
   const changeInputValue = (inputValue) => {
@@ -19,10 +20,13 @@ export const  UseStateHook = () => {
 
   const addTodo = (e) => {
     e.preventDefault();
-    setAllTodos((preValue)=>{
-      return [...preValue, { id:allTodos.length, value: inputValue, completed: false }]
+    setAllTodos((preValue) => {
+      return [
+        ...preValue,
+        { id: allTodos.length, value: inputValue, completed: false },
+      ];
     });
-    setInputValue('')
+    setInputValue("");
   };
 
   const deleteTodo = (index) => {
@@ -43,30 +47,36 @@ export const  UseStateHook = () => {
 
   return (
     <>
-    <div className="UseStateHook">
+        {/* <StoreAndStoreProvider> */}
+        {/* <ContextPage></ContextPage> */}
+        {/* </StoreAndStoreProvider> */}
 
-    useStateHook 
-    <div>
-    {obj.hello} : this was render with react-router-dom outlet context
-    </div>
-        
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          onChange={(e) => changeInputValue(e.target.value)}
-          value={inputValue}
-        />
-        <button type="submit">set todo</button>
-      </form>
 
-      <div>
-        <RenderTodoList propsAllTodos={allTodos} propsSetComplete={(index)=>setComplete(index)}propsDeleteTodo={(index)=>deleteTodo(index)}></RenderTodoList>
+      <div className="UseStateHook">
+        useStateHook
+        <div>
+          {obj.hello} : this was render with react-router-dom outlet context
+        </div>
+        <form onSubmit={addTodo}>
+          <input
+            type="text"
+            onChange={(e) => changeInputValue(e.target.value)}
+            value={inputValue}
+          />
+          <button type="submit">set todo</button>
+        </form>
+        <div>
+          <RenderTodoList
+            propsAllTodos={allTodos}
+            propsSetComplete={(index) => setComplete(index)}
+            propsDeleteTodo={(index) => deleteTodo(index)}
+          ></RenderTodoList>
+        </div>
       </div>
-        
-    </div>
-    <div>
-      <p>Code : </p>  
-      <Code value={`
+      <div>
+        <p>Code : </p>
+        <Code
+          value={`
         import React, { useState } from "react";
         import { useOutletContext } from "react-router-dom";
         import RenderTodoList from "./components/todo.jsx";
@@ -137,10 +147,11 @@ export const  UseStateHook = () => {
         }
         
         export default UseStateHook;
-      `}></Code>
-    </div>
+      `}
+        ></Code>
+      </div>
     </>
   );
-}
+};
 
 export default UseStateHook;
