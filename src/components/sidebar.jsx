@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "../store";
 
 export const Sidebar = () => {
   // here I have used Link component, it take multiple props
@@ -8,6 +9,8 @@ export const Sidebar = () => {
   //* 3. reloadDocument: this will reload entire page on click by default react-router only conditionaly renders content.
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch()
 
   return (
     <div className="flex flex-col h-screen p-3 bg-white shadow w-60 sticky top-0">
@@ -265,7 +268,7 @@ export const Sidebar = () => {
                 </svg>
                 <button
                   onClick={() => {
-                    localStorage.removeItem("loggedInUser");
+                    dispatch({type:"REMOVE_LOGGINED_USER"})
                     navigate("/login");
                   }}
                 >

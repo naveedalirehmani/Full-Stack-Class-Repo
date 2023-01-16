@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import Toastify from "toastify-js";
+import { useDispatch, useStore } from '../store';
 
 function LogInPage (props){
     
     const Navigate = useNavigate()
     
-    const allUsers = JSON.parse(localStorage.getItem('users'))
+    const allUsers = useStore().allUsers
+    const dispatch = useDispatch()
 
     const [userData,setUserData] = useState({
         email:'',
@@ -26,7 +28,7 @@ function LogInPage (props){
         })
 
         if(user){
-            localStorage.setItem('loggedInUser',JSON.stringify(user))
+            dispatch({type:'ADD_LOGGINED_USER',payload:user})
             Navigate('/userprofile')
         }else{
             Toastify({

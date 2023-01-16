@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Toastify from "toastify-js";
+import {useStore,useDispatch} from '../store'
 
 function SignUpPage(props) {
   const [userData, setUserData] = useState({
@@ -47,6 +48,9 @@ function SignUpPage(props) {
     setUserData(updatedUserData);
   };
 
+  const allUsers = useStore().allUsers
+  const dispatch = useDispatch()
+  
   const createAccount = () => {
     if (!userData.password || !userData.confirm_password) {
       Toastify({
@@ -77,7 +81,7 @@ function SignUpPage(props) {
       return;
     }
 
-    const allUsers = JSON.parse(localStorage.getItem("users"));
+    dispatch({type:"ADD_USER",payload:userData})
 
     Toastify({
       text: "Account created!",
@@ -88,15 +92,7 @@ function SignUpPage(props) {
       },
     }).showToast();
     
-    if (!allUsers) {
-      localStorage.setItem("users", JSON.stringify([userData]));
-    } else {
-      allUsers.push(userData);
-      localStorage.setItem("users", JSON.stringify(allUsers));
-    }
   };
-
-  console.log(userData);
 
   return (
     <div>

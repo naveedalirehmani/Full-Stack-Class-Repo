@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Code from "../components/code.jsx";
-import ContextPage from "../store/component.jsx";
 import RenderTodoList from "./components/todo.jsx";
 
 export const UseStateHook = () => {
@@ -46,15 +45,6 @@ export const UseStateHook = () => {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <ContextPage></ContextPage>
-      <br />
-      <br />
-      <br />
-      <br />
       <div className="UseStateHook">
         useStateHook
         <div>

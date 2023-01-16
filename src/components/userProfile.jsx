@@ -1,9 +1,9 @@
 import React from 'react'
+import { useStore } from '../store'
 import UserCard from './userCards'
 
 export const UserProfile = () => {
-  const user = JSON.parse(localStorage.getItem('loggedInUser'))
-
+  const user = useStore().loggedInUser
   return (
     <div>UserProfile
 

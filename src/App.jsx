@@ -6,7 +6,7 @@ import UserProfile from "./components/userProfile.jsx";
 import MultipleRoutes from "./routes";
 import Auth from "./routes/auth";
 import "./App.css";
-import StoreAndStoreProvider from './store/store'
+import { useStore } from "./store/index.jsx";
 
 export const App = () => {
   // here * is used to match all incoming urls, by doing this we can nest/group routes together.
@@ -22,10 +22,9 @@ export const App = () => {
 
   const navigate = useNavigate();
 
+const user = useStore().loggedInUser
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser");
-
-    if (!user) navigate("/login");
+    if (!user.email) navigate("/login");
   }, []);
 
   return (
