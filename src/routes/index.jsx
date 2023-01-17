@@ -8,6 +8,7 @@ import NotFoundPage from '../components/notfoundpage.jsx'
 import ReactRouterDom from '../components/reactrouterdom.jsx'
 import Hooks from '../hooks/hooks'
 import UseContextHook from '../hooks/useContext'
+import StateManager from '../components/statemanager'
 
 const routes = [
     {
@@ -63,6 +64,7 @@ const MultipleRoutes = () => {
             <Route path='reactrouterdom' element={<ReactRouterDom></ReactRouterDom>}></Route>
             <Route path='customhooks' element={<Hooks></Hooks>}></Route>
             <Route path='useContext-useState' element={<UseContextHook></UseContextHook>}></Route>
+            <Route path='statemanager' element={<StateManager></StateManager>}></Route>
             <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Route>
         </Routes>
