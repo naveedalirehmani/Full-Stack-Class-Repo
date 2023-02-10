@@ -10,6 +10,7 @@ const UserModel = require("../schemas/user.schema");
 const Signup = async (req, res) => {
   const { username, email, password, confirm_password } = req.body;
 
+  console.log("test");
   const user = new UserModel({
     username,
     email,
