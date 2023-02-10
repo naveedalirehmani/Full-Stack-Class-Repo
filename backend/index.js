@@ -5,6 +5,7 @@ const routes = require("./routes/route");
 const app = express();
 
 connectDb();
+console.log('test')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
