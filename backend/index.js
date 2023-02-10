@@ -2,6 +2,7 @@ const express = require("express");
 const connectDb = require("./mongoose");
 const routes = require("./routes/route");
 
+console.log('testing')
 const app = express();
 
 connectDb();
