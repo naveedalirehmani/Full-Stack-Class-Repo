@@ -1,5 +1,6 @@
-const UserModel = require("../schemas/user.schema");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const UserModel = require("../schemas/user.schema");
 const { HashPassword, VerifyPassword } = require("../helpers");
 
 /**
@@ -9,6 +10,15 @@ const { HashPassword, VerifyPassword } = require("../helpers");
  * @returns
 
 */
+
+const ListUser = async (req, res) => {
+  const users = await UserModel.find();
+
+  return res.status(200).json({
+    message: "Users",
+    users,
+  });
+};
 
 const Signup = async (req, res) => {
   try {
@@ -22,10 +32,17 @@ const Signup = async (req, res) => {
       });
       await user.save();
 
+      const payload = {
+        id: user.id,
+      };
+
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+
       return res.status(201).json({
         message: "Signup successfull",
         status: true,
         user,
+        token,
       });
     } else {
       return res.status(400).send({
@@ -49,21 +66,26 @@ const Login = async (req, res) => {
     ],
   });
 
+  const payload = {
+    id: user.id,
+  };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET);
   if (VerifyPassword(password, user.password)) {
     return res.status(200).json({
       message: "Login successfull",
       user,
+      token,
     });
   } else {
     return res.status(400).send({
       message: "Password incorrect",
     });
   }
-
-  console.log(user);
 };
 
 module.exports = {
+  ListUser,
   Signup,
   Login,
 };
