@@ -12,7 +12,11 @@ const { HashPassword, VerifyPassword } = require("../helpers");
 */
 
 const ListUser = async (req, res) => {
-  const users = await UserModel.find();
+  console.log(req.user);
+
+  const users = await UserModel.findOne({
+    _id: req.user._id,
+  });
 
   return res.status(200).json({
     message: "Users",
