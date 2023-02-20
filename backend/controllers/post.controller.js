@@ -1,9 +1,38 @@
+const Sort = require("../helpers/sort");
 const PostModel = require("../schemas/post.schema");
 
 const ListPosts = async (req, res) => {
-  const post = await PostModel.find({
-    status: 1,
-  });
+  const { page_no, page_size } = req.query;
+  const { sort_column, sort_order } = Sort(req);
+
+  const ps = parseInt(page_size) || 10;
+  const pn = parseInt(page_no) || 1;
+
+  const myCustomLabels = {
+    totalDocs: "postCount",
+    limit: "page_size",
+    page: "page_no",
+    nextPage: "next",
+    prevPage: "prev",
+    totalPages: "pageCount",
+    pagingCounter: "slNo",
+    meta: "paginator",
+    docs: "postList",
+  };
+
+  const post = await PostModel.paginate(
+    {
+      status: 1,
+    },
+    {
+      offset: pn * ps - ps,
+      limit: ps,
+      sort: {
+        [sort_column]: sort_order,
+      },
+      myCustomLabels,
+    }
+  );
 
   return res.status(201).json({
     post,
