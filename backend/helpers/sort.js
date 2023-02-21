@@ -1,4 +1,4 @@
-const Sort = (req) => {
+ const Sort = (req) => {
   const { sort } = req.query;
 
   let sort_column, sort_order;

@@ -298,6 +298,7 @@ export const Sidebar = () => {
                 <button
                   onClick={() => {
                     dispatch({type:"REMOVE_LOGGINED_USER"})
+                    localStorage.removeItem('token')
                     navigate("/login");
                   }}
                 >

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Toastify from "toastify-js";
-import {useStore,useDispatch} from '../store'
+import { useStore, useDispatch } from "../store";
+import { http, updateToken } from "../http/http";
+import axios from "axios";
 
 function SignUpPage(props) {
   const [userData, setUserData] = useState({
@@ -11,6 +13,8 @@ function SignUpPage(props) {
     fullname: "",
     picture: "",
   });
+
+  const navigate = useNavigate();
 
   const base64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -48,10 +52,13 @@ function SignUpPage(props) {
     setUserData(updatedUserData);
   };
 
-  const allUsers = useStore().allUsers
-  const dispatch = useDispatch()
-  
-  const createAccount = () => {
+  const allUsers = useStore().allUsers;
+  const dispatch = useDispatch();
+
+
+
+
+  const createAccount = async () => {
     if (!userData.password || !userData.confirm_password) {
       Toastify({
         text: "password fields are empty",
@@ -81,17 +88,32 @@ function SignUpPage(props) {
       return;
     }
 
-    dispatch({type:"ADD_USER",payload:userData})
 
-    Toastify({
-      text: "Account created!",
-      duration: 3000,
-      close: true,
-      style: {
-        background: "linear-gradient(to right, #00db1d, #ff9100)",
-      },
-    }).showToast();
-    
+    await http
+      .post("/auth/signup", {
+        ...userData,
+      })
+      .then((res) => {
+
+        localStorage.setItem('token' , res.data.token)
+        dispatch({ type: "ADD_LOGGINED_USER", payload: res.data.user });
+
+
+        
+        Toastify({
+          text: "Account created!",
+          duration: 3000,
+          close: true,
+          style: {
+            background: "linear-gradient(to right, #00db1d, #ff9100)",
+          },
+        }).showToast();
+
+        navigate("/userprofile")
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
   };
 
   return (

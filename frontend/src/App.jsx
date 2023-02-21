@@ -6,7 +6,8 @@ import UserProfile from "./components/userProfile.jsx";
 import MultipleRoutes from "./routes";
 import Auth from "./routes/auth";
 import "./App.css";
-import { useStore } from "./store/index.jsx";
+import { useDispatch, useStore } from "./store/index.jsx";
+import { http, updateToken } from "./http/http.js";
 
 export const App = () => {
   // here * is used to match all incoming urls, by doing this we can nest/group routes together.
@@ -15,16 +16,37 @@ export const App = () => {
   // <Route path="/*">
   //   <Route path="/one" element={<One></One>}></Route>
   //   <Route></Route>
-  //   <Route></Route>
+  //   <Route></Route>loggedInUser
   // </Route>
 
   //* there are two reason why we would do this. one to nest routes so that we can group related routes together and break our routes into multiple components, 2. so that we can add a prefix route and a common layout to a group of routes, here in this file we have nested routes for the first reason and in the route/index file we nest routes for the second reason.
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    updateToken(token);
+  }, []);
+
   const navigate = useNavigate();
 
-const user = useStore().loggedInUser
+  const user = useStore();
+
   useEffect(() => {
-    if (!user.email) navigate("/login");
+    if (!user) {
+      try {
+        http.get("/auth").then((res) => {
+          dispatch({ type: "ADD_LOGGINED_USER", payload: res.data.user });
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
+    }
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) navigate("/login");
   }, []);
 
   return (
