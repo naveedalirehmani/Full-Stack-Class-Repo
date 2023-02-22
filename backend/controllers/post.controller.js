@@ -1,4 +1,5 @@
 const Sort = require("../helpers/sort");
+const AttachmentModel = require("../schemas/attachment.schema");
 const PostModel = require("../schemas/post.schema");
 
 const ListPosts = async (req, res) => {
@@ -25,6 +26,7 @@ const ListPosts = async (req, res) => {
       status: 1,
     },
     {
+      populate: 'attachment',
       offset: pn * ps - ps,
       limit: ps,
       sort: {
@@ -32,7 +34,7 @@ const ListPosts = async (req, res) => {
       },
       myCustomLabels,
     }
-  );
+  )
 
   return res.status(201).json({
     post,
@@ -104,10 +106,29 @@ const DeletePost = async (req, res) => {
   });
 };
 
+const CreateAttachemt = async (req, res) => {
+  const { filename, fieldname, path, mimetype, size, encoding } = req.file;
+
+  const attachment = new AttachmentModel({
+    filename,
+    fieldname,
+    path,
+    mimetype,
+    size,
+    encoding,
+  });
+  await attachment.save()
+
+  return res.status(201).json({
+    attachment
+  })
+};
+
 module.exports = {
   Post,
   UpdatePost,
   DeletePost,
   ListPosts,
   UpsertPost,
+  CreateAttachemt,
 };
