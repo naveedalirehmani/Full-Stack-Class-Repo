@@ -21,12 +21,13 @@ const ListPosts = async (req, res) => {
     docs: "postList",
   };
 
+  // const post = await PostModel.find().populate("attachment_id");
   const post = await PostModel.paginate(
     {
       status: 1,
     },
     {
-      populate: 'attachment',
+      populate: "attachment",
       offset: pn * ps - ps,
       limit: ps,
       sort: {
@@ -34,7 +35,7 @@ const ListPosts = async (req, res) => {
       },
       myCustomLabels,
     }
-  )
+  );
 
   return res.status(201).json({
     post,
@@ -117,11 +118,33 @@ const CreateAttachemt = async (req, res) => {
     size,
     encoding,
   });
-  await attachment.save()
+  await attachment.save();
 
   return res.status(201).json({
-    attachment
-  })
+    attachment,
+  });
+};
+
+const CreateAttachments = async (req, res) => {
+  let attachmentArr = [];
+  for (const i of req.files) {
+    const { filename, fieldname, path, mimetype, size, encoding } = i;
+
+    const attachment = new AttachmentModel({
+      filename,
+      fieldname,
+      path,
+      mimetype,
+      size,
+      encoding,
+    });
+    await attachment.save();
+
+    attachmentArr.push(attachment);
+  }
+  return res.status(201).json({
+    attachment: attachmentArr,
+  });
 };
 
 module.exports = {
@@ -131,4 +154,5 @@ module.exports = {
   ListPosts,
   UpsertPost,
   CreateAttachemt,
+  CreateAttachments,
 };
