@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+ul {
+  padding: 0;
+}
+
+li {
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+li button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+li button:hover {
+  color: #666;
+}
+
+li input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+form input[type='text'] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button[type='submit'] {
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button[type='submit']:hover {
+  background-color: #666;
+}
+
+button{
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin:0.1rem;
+}
+button:hover{
+  color: rgb(163, 163, 163);
+}
+
+.code {
+  padding: 0.1rem 0.2rem;
+  background-color: #4e4e4e;
+  color:rgb(255, 255, 255);
+  /* color: #f8f8f2; */
+  border-radius: 0.3rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.code {
+  padding: 0.1rem 0.2rem;
+  background-color: #4e4e4e;
+  color:rgb(255, 255, 255);
+  /* color: #f8f8f2; */
+  border-radius: 0.3rem;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size:2rem;
+  font-weight:700;
+}
