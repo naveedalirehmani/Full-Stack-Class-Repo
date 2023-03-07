@@ -8,10 +8,11 @@ import Auth from "./routes/auth";
 import "./App.css";
 import { useDispatch, useStore } from "./store/index.jsx";
 import { http, updateToken } from "./http/http.js";
+import { useQuery } from "react-query";
+import { userQuery } from "./query/quries.js";
 
 export const App = () => {
   const location = useLocation();
-  console.log(location.pathname);
   // here * is used to match all incoming urls, by doing this we can nest/group routes together.
 
   //? you can nest multiple route in side a single route like this.
@@ -25,26 +26,30 @@ export const App = () => {
 
   const dispatch = useDispatch();
 
+  const token = localStorage.getItem("token");
+
+  const { data, isLoading, error, refetch } = useQuery('USER', () => {
+    if (!token) return
+
+    return userQuery()
+  })
+
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     updateToken(token);
+    if (token) {
+      refetch()
+    }
   }, []);
 
-  const navigate = useNavigate();
-
-  const user = useStore();
-
-  useEffect(() => {
-    if (!user) {
-      try {
-        http.get("/auth").then((res) => {
-          dispatch({ type: "ADD_LOGGINED_USER", payload: res.data.user });
-        });
-      } catch (err) {
-        throw new Error(err);
-      }
+  useEffect(()=>{
+    if(data) {
+      dispatch({ type: "ADD_LOGGINED_USER", payload: data.user });
     }
-  });
+  }, [data , dispatch])
+
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

@@ -15,9 +15,9 @@ const PostRouter = Router();
 
 PostRouter.get("/", ListPosts);
 PostRouter.post("/", Post);
-PostRouter.put("/:id", UpdatePost);
-PostRouter.put("/upsert/:id", UpsertPost);
-PostRouter.delete("/:id", DeletePost);
+PostRouter.put("/:id", Authenticate, UpdatePost);
+PostRouter.put("/upsert/:id", Authenticate, UpsertPost);
+PostRouter.delete("/:id", Authenticate, DeletePost);
 
 const upload = multer({ dest: "uploads/" });
 

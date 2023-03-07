@@ -76,9 +76,16 @@ const CreateProfile = async (req, res) => {
   });
 };
 
+const user = async (req, res) => {
+  console.log(req.user);
+  res.send({
+    user: req.user,
+  });
+};
+
 const Login = async (req, res) => {
-  const {email , password } = req.body;
-  console.log(req.body + '1');
+  const { email, password } = req.body;
+  console.log(req.body + "1");
 
   const user = await UserModel.findOne({
     $or: [
@@ -110,9 +117,24 @@ const Login = async (req, res) => {
   }
 };
 
+const uploadFile = async () => {
+  const buffer = await sharp(req.file.buffer)
+    .resize({ width: 500, height: 500 })
+    .png()
+    .toBuffer();
+
+  req.user.avatar = buffer;
+
+  await req.user.save(req.user.avatar);
+
+  res.send("uploaded");
+};
+
 module.exports = {
   ListUser,
   Signup,
   Login,
   CreateProfile,
+  user,
+  uploadFile,
 };

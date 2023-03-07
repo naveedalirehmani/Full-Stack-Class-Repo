@@ -1,7 +1,6 @@
 
 import React, { Suspense, useEffect } from 'react'
 import { Card } from './card.jsx'
-import useFetch from '../hooks/custom/useFetch'
 import { Spinner } from './spinner.jsx'
 import PaginationBar from './pagination.jsx'
 import { useSearchParams } from 'react-router-dom'
