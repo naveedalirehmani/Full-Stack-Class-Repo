@@ -13,3 +13,8 @@ export const userQuery = async () => {
   const res = await http.get("/auth/user");
   return res.data;
 };
+
+export const PostQuery = async () => {
+  const res = await http.get("/post/");
+  return res.data;
+};
