@@ -14,7 +14,14 @@ export const userQuery = async () => {
   return res.data;
 };
 
-export const PostQuery = async () => {
+export const PostsQuery = async () => {
   const res = await http.get("/post/");
+  return res.data;
+};
+
+export const PostQuery = async (id) => {
+  if (!id) return;
+
+  const res = await http.get(`/post/${id}`);
   return res.data;
 };

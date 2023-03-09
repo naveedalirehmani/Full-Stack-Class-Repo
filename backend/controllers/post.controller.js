@@ -42,6 +42,18 @@ const ListPosts = async (req, res) => {
   });
 };
 
+const PostsById = async (req, res) => {
+  try {
+    const post = await PostModel.findOne({ _id: req.params.id });
+
+    return res.status(200).json({
+      post,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const Post = async (req, res) => {
   const post = new PostModel({ ...req.body, status: 1 });
   await post.save();
@@ -155,4 +167,5 @@ module.exports = {
   UpsertPost,
   CreateAttachemt,
   CreateAttachments,
+  PostsById,
 };

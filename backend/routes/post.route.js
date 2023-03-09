@@ -8,12 +8,14 @@ const {
   ListPosts,
   CreateAttachemt,
   CreateAttachments,
+  PostsById,
 } = require("../controllers/post.controller");
 const Authenticate = require("../helpers/authenticate");
 
 const PostRouter = Router();
 
 PostRouter.get("/", ListPosts);
+PostRouter.get('/:id' , PostsById)
 PostRouter.post("/", Post);
 PostRouter.put("/:id", Authenticate, UpdatePost);
 PostRouter.put("/upsert/:id", Authenticate, UpsertPost);

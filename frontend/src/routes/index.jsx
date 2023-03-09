@@ -9,7 +9,10 @@ import ReactRouterDom from '../components/reactrouterdom.jsx'
 import Hooks from '../hooks/hooks'
 import UseContextHook from '../hooks/useContext'
 import StateManager from '../components/statemanager'
-import Blogs from './Blogs'
+import ReadBlogs from '../components/Blogs'
+import Blog from '../components/Blog'
+import Create from '../components/Create'
+
 
 const routes = [
   {
@@ -62,7 +65,11 @@ const MultipleRoutes = () => {
         <Route path='usestate' element={<UseStateHook></UseStateHook>}></Route>
         <Route path='usereducer' element={<UseReducerHook></UseReducerHook>}></Route>
         <Route path='rickandmorty' element={<RickAndMorty></RickAndMorty>}></Route>
-        <Route path='blogs' element={<Blogs></Blogs>}></Route>
+        <Route path='blogs' >
+          <Route index element={<ReadBlogs />}></Route>
+          <Route path='create' element={<Create />}></Route>
+          <Route path=':id' element={<Blog />} ></Route>
+        </Route>
         <Route path='reactrouterdom' element={<ReactRouterDom></ReactRouterDom>}></Route>
         <Route path='customhooks' element={<Hooks></Hooks>}></Route>
         <Route path='useContext-useState' element={<UseContextHook></UseContextHook>}></Route>
