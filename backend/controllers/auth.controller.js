@@ -77,7 +77,6 @@ const CreateProfile = async (req, res) => {
 };
 
 const user = async (req, res) => {
-  console.log(req.user);
   res.send({
     user: req.user,
   });

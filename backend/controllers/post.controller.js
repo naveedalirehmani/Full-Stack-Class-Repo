@@ -6,7 +6,7 @@ const ListPosts = async (req, res) => {
   const { page_no, page_size } = req.query;
   const { sort_column, sort_order } = Sort(req);
 
-  const ps = parseInt(page_size) || 10;
+  const ps = parseInt(page_size) || 20;
   const pn = parseInt(page_no) || 1;
 
   const myCustomLabels = {
@@ -120,20 +120,22 @@ const DeletePost = async (req, res) => {
 };
 
 const CreateAttachemt = async (req, res) => {
-  const { filename, fieldname, path, mimetype, size, encoding } = req.file;
+  // const { filename, fieldname, path, mimetype, size, encoding } = req.file;
+  console.log(req.file);
 
-  const attachment = new AttachmentModel({
-    filename,
-    fieldname,
-    path,
-    mimetype,
-    size,
-    encoding,
-  });
-  await attachment.save();
+  // const attachment = new AttachmentModel({
+  //   filename,
+  //   fieldname,
+  //   path,
+  //   mimetype,
+  //   size,
+  //   encoding,
+  // });
+  // await attachment.save();
 
   return res.status(201).json({
-    attachment,
+    // attachment,
+    message: "here",
   });
 };
 

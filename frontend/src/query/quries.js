@@ -14,8 +14,13 @@ export const userQuery = async () => {
   return res.data;
 };
 
-export const PostsQuery = async () => {
-  const res = await http.get("/post/");
+export const PostsQuery = async (page_no, page_limit) => {
+  const res = await http.get("/post/", {
+    params: {
+      page_no,
+      page_size: page_limit,
+    },
+  });
   return res.data;
 };
 
